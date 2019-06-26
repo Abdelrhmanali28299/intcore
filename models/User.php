@@ -83,6 +83,10 @@ class User implements Iuser
                 $_SESSION['email'] = $email;
                 $_SESSION['photo'] = $photo;
                 $_SESSION['hash'] = $hashed_password;
+                setcookie("name", $_SESSION['name'], time() + (86400 * 30), "/");
+                setcookie("email", $_SESSION['email'], time() + (86400 * 30), "/");
+                setcookie("photo", $_SESSION['photo'], time() + (86400 * 30), "/");
+                setcookie("hash", $_SESSION['hash'], time() + (86400 * 30), "/");
             }
         } else {
             $sql = "UPDATE `user` SET `name`='${name}',`email`='${email}',`pass`='${hashed_password}',`photo`='${photo}' WHERE `id`=${id}";
@@ -93,6 +97,12 @@ class User implements Iuser
             $_SESSION['email'] = $email;
             $_SESSION['photo'] = $photo;
             $_SESSION['hash'] = $hashed_password;
+            if (isset($_COOKIE["id"])) {
+                setcookie("name", $_SESSION['name'], time() + (86400 * 30), "/");
+                setcookie("email", $_SESSION['email'], time() + (86400 * 30), "/");
+                setcookie("photo", $_SESSION['photo'], time() + (86400 * 30), "/");
+                setcookie("hash", $_SESSION['hash'], time() + (86400 * 30), "/");
+            }
         }
     }
 }
